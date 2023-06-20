@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Home | student affairs {% endblock title %}
+
+{% block headscript %}
+    <link rel="stylesheet" href='{% static "css/home.css" %}'>
+{% endblock headscript %}
+
+{% block content %}
+<div class="body-container">
+    <section>
+        <div class="main-image">
+            <img src="{% static 'img/background.jpg' %}"/>
+        </div>
+    </section>
+    
+    
+    <section class="bg-dark text-light">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg">
+                    <h3>
+                        services provided by the student affairs
+                    </h3>
+                    <p>
+                        1. Providing Skolarchs & University Luanz to The Student.<br>
+                        2. Cordenachion & Couberation with People and Institute At Ari Intersted in Helbing Student.<br>
+                        3. Supervision Stuttgart Sushal, Sport & Techniki Activities & Fuling Up on Stuttgart Issuis.<br>
+                    </p>
+                </div>
+
+                <div class="col-lg">
+                    <h3>
+                        Student Affairs
+                    </h3>
+                    <p>
+                        The Department of Student Affairs is the link between the students of the college and the various departments and units of the college,
+                         and works to help students to continue their education and find solutions to their problems in various forms academic, financial and psychosocial.
+
+.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light" >
+        <div class="container-fluid" style="background-color:rgb(152, 188, 198) ;">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'img/cairo_uni_logo.png' %}" alt="" width="35" height="45"
+                    class="d-inline-block">
+                    student affairs
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <div class="navbar-nav">
+                    {% url 'home' as home_url %}
+                    {% url 'home' as home %}
+                    {% url 'home' as home %}
+                    <a class="nav-link {% if request.get_full_path == home_url %}active{% endif %}" 
+                        href="{% url 'home' %}">
+                        Human Resources
+                    </a>
+                    <a class="nav-link {% if request.get_full_path == home %}active{% endif %}"
+                        href="{% url 'home' %}">
+                        Higher studies
+                    </a>
+                    <a class="nav-link {% if request.get_full_path == home %}active{% endif %}"
+                        href="{% url 'home' %}">
+                        Laboratory tracking
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </nav>
+
+   
+</div>
+{% endblock %}

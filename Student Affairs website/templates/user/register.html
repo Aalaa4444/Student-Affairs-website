@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Register | student affairs  {% endblock title %}
+
+{% block headscript %}
+    {% load crispy_forms_tags %}
+{% endblock headscript %}
+
+{% block content %}
+    <div class="container py-5 body-container">
+        <div class="row">
+            <div class="col-md">
+                <h1>Welcome to your online student affairs</h1>
+            </div>
+            <form class="col-md" method='POST'>
+                {% csrf_token %}
+                <h2 class="mb-3">Sign up</h2>
+                
+                {{ form|crispy }}
+
+                <div id="hdn" style="display:none;" class="text-danger">
+                    Passwords doesn't match
+                </div>
+        
+                <button class="btn btn-dark mt-3" onclick="javascript:void(0)" type="submit">Sign up</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block jsScripts %}
+    <script src="{% static 'js/realTimePasswordValidation.js' %}"></script>
+{% endblock jsScripts %}

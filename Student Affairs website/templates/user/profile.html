@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Profile | student affairs  {% endblock title %}
+
+{% block headscript %}
+    {% load crispy_forms_tags %}
+{% endblock headscript %}
+
+{% block content %}
+
+    <div class="container py-5 body-container">
+        <div class="row">
+            <div class="col-md">
+                <h1>Welcome to your profile, {{user|title}}</h1>
+            </div>
+            <form class="col-md" method='POST'>
+                {% csrf_token %}
+                <h2 class="mb-3">Profile</h2>
+                
+                {{ form|crispy }}
+
+                <div id="hdn" style="display:none;" class="text-danger">
+                    Passwords doesn't match
+                </div>
+        
+                <button class="btn btn-dark mt-3" type="submit">Submit</button>
+
+                {% url 'changepassword' as changepassword_url %}
+                {% if request.get_full_path != changepassword_url %}
+                    <div>
+                        <a href="{% url 'changepassword' %}"> Change Password </a>
+                    </div>
+                {% endif %}
+            </form>
+            
+        </div>
+        <div>
+            {% if user.is_superuser %}
+                <ul class="list-group my-5">
+                    {% for itr_user in users %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>
+                                {{ itr_user.username }}
+                            </span>
+                            <span>
+                                <button
+                                    type="button" class="btn btn-{% if itr_user.is_superuser %}danger{% else %}success{% endif %}"
+                                    onclick="changeAdminStatus('{{ itr_user.username }}');">
+                                    {% if itr_user.is_superuser %}
+                                        Remove Admin
+                                    {% else %}
+                                        Make Admin
+                                    {% endif %}
+                                </button>
+                            </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
+
+{% block jsScripts %}
+    <script src="{% static 'js/profile.js' %}"></script>
+    <script src="{% static 'js/realTimePasswordValidation.js' %}"></script>
+{% endblock jsScripts %}

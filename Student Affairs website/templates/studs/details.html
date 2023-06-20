@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ stud.Fname }} |  student affairs {% endblock title %}
+
+{% block content %}
+<div class="container py-5 body-container">
+    <h1>{{ stud.Fname }}</h1>
+    <p>ID: {{ stud.STUDENT_ID }}</p>
+    <p>Lname: {{ stud.Lname }}</p>
+    <p>BIRTH date: {{ stud.birthDate }}</p>
+    <p>Gender: {{ stud.gender }}</p>
+    <p>GPA: {{ stud.gpa }}</p>
+    <p>LEVEL: {{ stud.level }}</p>
+    <p>STATUS: {{ stud.status }}</p>
+    <p>DEPARTMENT: {{ stud.depart }}</p>
+    <p>EMAIL: {{ stud.email }}</p>
+    <p>PHONE: {{ stud.phone }}</p>
+    
+
+    <a class="btn btn-info mt-3 me-2" href="{% url 'changeDepart' stud_id=stud.id %}">
+        Department
+    </a>
+
+    
+    <a class="btn btn-danger mt-3 me-2" href="{% url 'deletestud' stud_id=stud.id %}" onclick="return confirm('Are you sure?');">
+        Delete
+    </a>
+
+    <a class="btn btn-info mt-3 me-2" href="{% url 'editstud' stud_id=stud.id %}">
+        Edit
+    </a>
+    
+
+</div>
+{% endblock content %}

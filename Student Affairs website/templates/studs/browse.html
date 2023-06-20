@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} student | student affairs {% endblock title %}
+
+{% block headscript %}
+{% load crispy_forms_tags %}
+{% endblock headscript %}
+
+{% block content %}
+
+<div class="body-container container-fluid">
+    <div class="row">
+        <form method="get" class="col-lg-2 p-3">
+            <h3>Search</h3>
+            {{ studs.form|crispy }}
+            <button class="btn btn-dark my-3 d-block btn-lg w-100" type="submit" >
+                Search
+            </button>
+            
+            <a href="{% url 'addstud' %}" class="my-3 btn btn-success d-block">
+                Add stud
+            </a>
+            
+        </form>
+        <div class="col container">
+            <div class="row w-100">
+                {% for stud in studs.qs %}
+                <div class="col-md-4 m-2 card">
+                    <div class="card-body">
+                        <h1>{{ stud.Fname }}</h1>
+                        <p>ID: {{ stud.STUDENT_ID }}</p>
+                        <p>Lname: {{ stud.Lname }}</p>
+                        <p>BIRTH DATE: {{ stud.birthDate }}</p>
+                        <p>Gender: {{ stud.gender }}</p>
+                        <p>GPA: {{ stud.gpa }}</p>
+                        <p>LEVEL: {{ stud.level }}</p>
+                        <a href=" {% url 'changeStatus' stud_id=stud.id %}">STATUS: {{ stud.status }}</a>
+                        <p>DEPARTMENT: {{ stud.depart }}</p>
+                        <p>EMAIL: {{ stud.email }}</p>
+                        <p>PHONE: {{ stud.phone }}</p>
+                        
+                        <a href=" {% url 'studdetails' stud_id=stud.id %}"><button class="btn btn-primary mt-3 me-2" type="button">Select student </button></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
